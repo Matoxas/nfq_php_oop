@@ -6,7 +6,7 @@
  * Time: 01:15
  */
 
-namespace Nfq\Akademija\Room;
+namespace Nfq\Akademija;
 
 
 class CustomException extends \Exception{

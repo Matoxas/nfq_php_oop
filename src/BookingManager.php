@@ -17,18 +17,27 @@ class BookingManager
 
         // todo if time clashes
 
+            try{
 
 
-        if($room->addReservation($reservation)){
+                foreach ($room->getReservations() as $res){
 
-            echo 'Room '.$room->getRoomNumber().' successfully booked
-            for <strong>'.$reservation->getGuest().'</strong>
-            from <time>'.$reservation->getStartDate()->format('Y-m-d').'</time>
-            to <time>'.$reservation->getEndDate()->format('Y-m-d').'</time>!';
+                    if($res->getstartDate() == $reservation->getStartDate()
+                        && $res->getendDate() == $reservation->getEndDate()){
 
-        }else{
-            echo 'fail';
-        }
+                        throw new CustomException('duplicated dates for a booking. ');
+                    }
+                }
+
+                $room->addReservation($reservation);
+                echo 'Room '.$room->getRoomNumber().' successfully booked
+                        for <strong>'.$reservation->getGuest().'</strong>
+                        from <time>'.$reservation->getStartDate()->format('Y-m-d').'</time>
+                        to <time>'.$reservation->getEndDate()->format('Y-m-d').'</time>!';
+
+            } catch (CustomException $e){
+                echo '<br> error: '. $e->getMessage();
+            }
 
 
 

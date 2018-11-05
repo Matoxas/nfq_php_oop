@@ -43,26 +43,13 @@ namespace Nfq\Akademija\Room;
          }
 
 
-         public function addReservation(Reservation $reservation)
-        {
-            try{
+         public function addReservation(Reservation $reservation){
+
+             array_push($this->reservations, $reservation);
+
+         }
 
 
-                foreach ($this->reservations as $res){
-
-                    if($res->getstartDate() == $reservation->getStartDate()
-                        && $res->getendDate() == $reservation->getEndDate()){
-
-                        throw new CustomException('duplicated dates for a booking. ');
-                    }
-                }
-
-                return array_push($this->reservations, $reservation);
-
-            } catch (CustomException $e){
-                echo '<br> error '. $e->getMessage();
-            }
-        }
 
         public function removeReservation(Reservation $reservation):string
         {
