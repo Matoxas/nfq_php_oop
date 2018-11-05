@@ -52,19 +52,19 @@ namespace Nfq\Akademija\Room;
 
                     if($res->getstartDate() == $reservation->getStartDate()
                         && $res->getendDate() == $reservation->getEndDate()){
-                        // todo throw exception
+
+                        throw new CustomException('duplicated dates for a booking. ');
                     }
                 }
 
-                array_push($this->reservations, $reservation);
-                return true;
+                return array_push($this->reservations, $reservation);
 
-            } catch (\Exception $e){
-                return $e;
+            } catch (CustomException $e){
+                echo '<br> error '. $e->getMessage();
             }
         }
 
-        public function removeReservation(Reservation $reservation)
+        public function removeReservation(Reservation $reservation):string
         {
 
             $key = array_search($reservation, $this->reservations);
@@ -82,7 +82,7 @@ namespace Nfq\Akademija\Room;
          /**
           * @return mixed
           */
-         public function getBedCount():\int
+         public function getBedCount()
          {
              return $this->bedCount;
          }
