@@ -1,0 +1,13 @@
+{
+    "name": "mataskazanavicius/php_intro",
+    "type": "project",
+    "autoload": {
+      "psr-4": {"Nfq\\Akademija\\": "src/"}
+    },
+    "authors": [
+        {
+            "name": "Matas Kazanavicius",
+            "email": "matoxas@gmail.com"
+        }
+    ]
+}
